@@ -5,29 +5,28 @@ using System.Linq;
 
 namespace SMTP1
 {
-    internal static class Program
+    internal static class Ex1
     {
-        private static void Main(string[] args)
+        internal static void Entry(string fileName)
         {
-            FileInfo fileName = ReadFile();
-            Dictionary<int, int> symbols = ReadSymbols(fileName);
+            FileInfo file = ReadFile(fileName);
+            Dictionary<char, int> symbolsCount = Common.ReadSymbolsCount(file);
             
             //1. a)
-            double entropy = CalculateEntropy(symbols);
-            PrintEntropy(entropy);
+            double entropy = CalculateEntropy(symbolsCount);
+            Common.PrintEntropy(entropy);
             
             //1. b)
-            List<KeyValuePair<int, int>> symbolsSorted = SortSymbolsByCount(symbols);
+            List<KeyValuePair<char, int>> symbolsSorted = SortSymbolsByCount(symbolsCount);
             PrintTopFive(symbolsSorted);
             
             //1. c)
-            List<KeyValuePair<int, int>> topHalfGroup = GetTopHalfGroup(symbolsSorted);
+            List<KeyValuePair<char, int>> topHalfGroup = GetTopHalfGroup(symbolsSorted);
             PrintTopHalfGroup(topHalfGroup);
         }
 
-        private static FileInfo ReadFile()
+        private static FileInfo ReadFile(string fileName)
         {
-            string fileName = "";
             if (String.IsNullOrEmpty(fileName))
             {
                 Console.WriteLine("File to read:");
@@ -37,55 +36,26 @@ namespace SMTP1
             return file;
         }
 
-        private static Dictionary<int, int> ReadSymbols(FileInfo fileName)
-        {
-            Dictionary<int, int> symbols = new Dictionary<int, int>();
-            using (FileStream fileStream = new FileStream(fileName.FullName, FileMode.Open, FileAccess.Read))
-            {
-                for (int i = 0; i < fileStream.Length; i++)
-                {
-                    int symbol = fileStream.ReadByte();
-                    if(symbol > 255)
-                        throw new InvalidDataException($"Invalid symbol {symbol}");
-                    
-                    if (symbols.TryGetValue(symbol, out int currentCount))
-                        symbols[symbol] = currentCount + 1;
-                    else
-                        symbols.Add(symbol, 1);
-                }
-            }
-            Console.WriteLine("----------");
-            Console.WriteLine($"Total Different Symbols: {symbols.Count}");
-            Console.WriteLine($"Total Symbol Count: {symbols.Values.Sum()}");
-            return symbols;
-        }
-
-        private static double CalculateEntropy(Dictionary<int,int> symbols)
+        private static double CalculateEntropy(Dictionary<char,int> symbols)
         {
             double entropy = 0;
             int nOfSymbols = symbols.Values.Sum();
-            foreach (KeyValuePair<int,int> keyValuePair in symbols)
+            foreach (var keyValuePair in symbols)
             {
-                double probability = ((double) keyValuePair.Value / nOfSymbols);
+                double probability = (double) keyValuePair.Value / nOfSymbols;
                 entropy += probability * Math.Log2(1 / probability);
             }
             return entropy;
         }
 
-        private static void PrintEntropy(in double entropy)
+        private static List<KeyValuePair<char, int>> SortSymbolsByCount(Dictionary<char,int> symbols)
         {
-            Console.WriteLine("----------");
-            Console.WriteLine($"The Entropy is {entropy}");
-        }
-
-        private static List<KeyValuePair<int, int>> SortSymbolsByCount(Dictionary<int,int> symbols)
-        {
-            List<KeyValuePair<int, int>> list = symbols.ToList();
+            List<KeyValuePair<char, int>> list = symbols.ToList();
             list.Sort((p1, p2) => p2.Value.CompareTo(p1.Value));
             return list;
         }
 
-        private static void PrintTopFive(List<KeyValuePair<int,int>> symbolsSorted)
+        private static void PrintTopFive(List<KeyValuePair<char,int>> symbolsSorted)
         {
             Console.WriteLine("----------");
             Console.WriteLine("Top Five:");
@@ -100,7 +70,7 @@ namespace SMTP1
             Console.WriteLine($"(Total Count: {totalCount})");
         }
 
-        private static List<KeyValuePair<int, int>> GetTopHalfGroup(List<KeyValuePair<int,int>> symbolsSorted)
+        private static List<KeyValuePair<char, int>> GetTopHalfGroup(List<KeyValuePair<char,int>> symbolsSorted)
         {
             int totalCount = symbolsSorted.Select(x => x.Value).Sum();
             int currentCount = 0;
@@ -119,7 +89,7 @@ namespace SMTP1
             return symbolsSorted.GetRange(0, index);
         }
 
-        private static void PrintTopHalfGroup(List<KeyValuePair<int,int>> topHalfGroup)
+        private static void PrintTopHalfGroup(List<KeyValuePair<char,int>> topHalfGroup)
         {
             Console.WriteLine("----------");
             Console.WriteLine($"Top Half Group:");
