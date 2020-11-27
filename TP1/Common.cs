@@ -33,9 +33,6 @@ namespace SMTP1
                     else
                         symbolsCount.Add(symbol, 1);
                 }
-            Console.WriteLine("----------");
-            Console.WriteLine($"Total Different Symbols: {symbolsCount.Count}");
-            Console.WriteLine($"Total Symbol Count: {symbolsCount.Values.Sum()}");
             return symbolsCount;
         }
 
@@ -102,22 +99,7 @@ namespace SMTP1
 
                     lastSymbol = currSymbol;
                 }
-            // Console.WriteLine("----------");
-            // Console.WriteLine($"Total Different Symbols: {symbols.Count}");
-            // Console.WriteLine($"Total Symbol Count: {symbols.Values.Aggregate(0, (amount, dict) => amount += dict.Values.Sum()) + 1}");
             return symbolsCountMfo;
-        }
-
-        internal static void PrintEntropy(in double entropy)
-        {
-            Console.WriteLine("----------");
-            Console.WriteLine($"The Entropy is {entropy}");
-        }
-        
-        internal static void PrintEntropyMarkovFirst(in double entropy)
-        {
-            Console.WriteLine("----------");
-            Console.WriteLine($"The Markov First Order Entropy is {entropy}");
         }
     }
 }

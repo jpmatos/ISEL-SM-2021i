@@ -11,18 +11,19 @@ namespace SMTP1
         {
             List<byte> source = Common.ReadFile(fileName);
             Dictionary<char, int> symbolsCount = Common.ReadSymbolsCount(source);
+            Print.PrintSymbolCount(symbolsCount.Count, symbolsCount.Values.Sum());
             
             //1. a)
             double entropy = Common.CalculateEntropy(symbolsCount);
-            Common.PrintEntropy(entropy);
+            Print.PrintEntropy(entropy);
             
             //1. b)
             List<KeyValuePair<char, int>> symbolsSorted = SortSymbolsByCount(symbolsCount);
-            PrintTopFive(symbolsSorted);
+            Print.PrintTopFive(symbolsSorted);
             
             //1. c)
             List<KeyValuePair<char, int>> topHalfGroup = GetTopHalfGroup(symbolsSorted);
-            PrintTopHalfGroup(topHalfGroup);
+            Print.PrintTopHalfGroup(topHalfGroup);
         }
 
         private static List<KeyValuePair<char, int>> SortSymbolsByCount(Dictionary<char,int> symbols)
@@ -32,20 +33,7 @@ namespace SMTP1
             return list;
         }
 
-        private static void PrintTopFive(List<KeyValuePair<char,int>> symbolsSorted)
-        {
-            Console.WriteLine("----------");
-            Console.WriteLine("Top Five:");
-            int totalCount = 0;
-            for (int i = 0; i < (symbolsSorted.Count > 5 ? 5 : symbolsSorted.Count); i++)
-            {
-                Console.WriteLine(
-                    $"{i + 1}º: '{Convert.ToChar(symbolsSorted[i].Key)}' (Count: {symbolsSorted[i].Value})");
-                totalCount += symbolsSorted[i].Value;
-            }
-
-            Console.WriteLine($"(Total Count: {totalCount})");
-        }
+        
 
         private static List<KeyValuePair<char, int>> GetTopHalfGroup(List<KeyValuePair<char,int>> symbolsSorted)
         {
@@ -64,16 +52,6 @@ namespace SMTP1
             }
 
             return symbolsSorted.GetRange(0, index);
-        }
-
-        private static void PrintTopHalfGroup(List<KeyValuePair<char,int>> topHalfGroup)
-        {
-            Console.WriteLine("----------");
-            Console.WriteLine($"Top Half Group:");
-            foreach (var t in topHalfGroup)
-                Console.WriteLine($"'{Convert.ToChar(t.Key)}' (Count: {t.Value})");
-            
-            Console.WriteLine($"(Total Count: {topHalfGroup.Select(x => x.Value).Sum()})");
         }
     }
 }

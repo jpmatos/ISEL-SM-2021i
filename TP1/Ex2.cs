@@ -14,7 +14,8 @@ namespace SMTP1
             Dictionary<char, int> symbolsCount = Common.ReadSymbolsCount(source);
             Dictionary<char, Dictionary<char, int>> symbolsCountMfo = Common.ReadMarkovFirstOrderCount(source);
             double entropy = Common.CalculateMarkovFirstOrderEntropy(symbolsCount, symbolsCountMfo);
-            Common.PrintEntropyMarkovFirst(entropy);
+            Print.PrintSymbolCount(symbolsCount.Count, symbolsCount.Values.Sum());
+            Print.PrintEntropyMarkovFirst(entropy);
         }
     }
 }

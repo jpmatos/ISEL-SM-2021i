@@ -14,32 +14,26 @@ namespace SMTP1
             //a.
             List<byte> source = Common.ReadFile(fileName);
             List<byte> sequence = GenerateClaudeShannonSequence(source);
-            
+
             //b.
-            Console.WriteLine("File");
             Dictionary<char, int> symbolsCount = Common.ReadSymbolsCount(source);
             double entropy = Common.CalculateEntropy(symbolsCount);
-            Common.PrintEntropy(entropy);
             Dictionary<char, Dictionary<char, int>> symbolsCountMfo = Common.ReadMarkovFirstOrderCount(source);
             double entropyMfo = Common.CalculateMarkovFirstOrderEntropy(symbolsCount, symbolsCountMfo);
-            Common.PrintEntropyMarkovFirst(entropyMfo);
-            
-            Console.WriteLine();
-            Console.WriteLine("New Sequence");
+
             Dictionary<char, int> symbolsCountSeq = Common.ReadSymbolsCount(sequence);
             double entropySeq = Common.CalculateEntropy(symbolsCountSeq);
-            Common.PrintEntropy(entropySeq);
             Dictionary<char, Dictionary<char, int>> symbolsCountMfoSeq = Common.ReadMarkovFirstOrderCount(sequence);
             double entropyMfoSeq = Common.CalculateMarkovFirstOrderEntropy(symbolsCountSeq, symbolsCountMfoSeq);
-            Common.PrintEntropyMarkovFirst(entropyMfoSeq);
-            
+            Print.PrintSourceAndSequenceEntropy(symbolsCount.Count, symbolsCount.Values.Sum(), symbolsCountSeq.Count,
+                symbolsCountSeq.Values.Sum(),
+                entropy, entropyMfo, entropySeq, entropyMfoSeq);
+
             //c.
             long sourceLengthCompressed = GetCompressionLength(source, out long sourceLengthUncompressed);
             long sequenceLengthCompressed = GetCompressionLength(sequence, out long sequenceLengthUncompressed);
-            Console.WriteLine($"Source Length Uncompressed: '{sourceLengthUncompressed}'");
-            Console.WriteLine($"Source Length Compressed: '{sourceLengthCompressed}'");
-            Console.WriteLine($"Sequence Length Uncompressed: '{sequenceLengthUncompressed}'");
-            Console.WriteLine($"Sequence Length Compressed: '{sequenceLengthCompressed}'");
+            Print.PrintCompressionLengths(sourceLengthUncompressed, sourceLengthCompressed, sequenceLengthUncompressed,
+                sequenceLengthCompressed);
         }
 
         private static long GetCompressionLength(List<byte> source, out long lengthUncompressed)
@@ -61,12 +55,12 @@ namespace SMTP1
         private static List<byte> GenerateClaudeShannonSequence(List<byte> book)
         {
             List<byte> sequence = new List<byte>();
-            
+
             Random random = new Random();
             int index = random.Next(0, book.Count);
             byte current = book[index];
             sequence.Add(current);
-            
+
             foreach (var _ in book.Skip(1))
             {
                 index = random.Next(0, book.Count);
@@ -74,9 +68,9 @@ namespace SMTP1
                 {
                     if (j == book.Count)
                         j = 0;
-                    if (book[j] != current) 
+                    if (book[j] != current)
                         continue;
-                    
+
                     if (j == book.Count - 1)
                         index = 0;
                     else
