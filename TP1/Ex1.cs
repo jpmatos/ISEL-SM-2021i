@@ -9,11 +9,11 @@ namespace SMTP1
     {
         internal static void Entry(string fileName)
         {
-            FileInfo file = ReadFile(fileName);
-            Dictionary<char, int> symbolsCount = Common.ReadSymbolsCount(file);
+            List<byte> source = Common.ReadFile(fileName);
+            Dictionary<char, int> symbolsCount = Common.ReadSymbolsCount(source);
             
             //1. a)
-            double entropy = CalculateEntropy(symbolsCount);
+            double entropy = Common.CalculateEntropy(symbolsCount);
             Common.PrintEntropy(entropy);
             
             //1. b)
@@ -23,29 +23,6 @@ namespace SMTP1
             //1. c)
             List<KeyValuePair<char, int>> topHalfGroup = GetTopHalfGroup(symbolsSorted);
             PrintTopHalfGroup(topHalfGroup);
-        }
-
-        private static FileInfo ReadFile(string fileName)
-        {
-            if (String.IsNullOrEmpty(fileName))
-            {
-                Console.WriteLine("File to read:");
-                fileName = Console.ReadLine();
-            }
-            FileInfo file = new FileInfo(fileName);
-            return file;
-        }
-
-        private static double CalculateEntropy(Dictionary<char,int> symbols)
-        {
-            double entropy = 0;
-            int nOfSymbols = symbols.Values.Sum();
-            foreach (var keyValuePair in symbols)
-            {
-                double probability = (double) keyValuePair.Value / nOfSymbols;
-                entropy += probability * Math.Log2(1 / probability);
-            }
-            return entropy;
         }
 
         private static List<KeyValuePair<char, int>> SortSymbolsByCount(Dictionary<char,int> symbols)

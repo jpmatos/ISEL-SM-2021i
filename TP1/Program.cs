@@ -7,7 +7,7 @@ namespace SMTP1
         //For debugging purposes
         private static readonly string fileName = "/home/jpmatos/Documents/SM/Trab1/corpusSM2021/pg3333.txt";
         //private static readonly string fileName = "/home/jpmatos/Documents/SM/Trab1/testfile.txt";
-        private static int ex = 1;
+        private static int ex = 3;
         
         public static void Main(string[] args)
         {
@@ -23,6 +23,9 @@ namespace SMTP1
                     break;
                 case 2:
                     Ex2.Entry(fileName);
+                    break;
+                case 3:
+                    Ex3.Entry(fileName);
                     break;
             }
         }
