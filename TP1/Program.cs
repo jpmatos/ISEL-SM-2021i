@@ -6,8 +6,9 @@ namespace SMTP1
     {
         //For debugging purposes
         private static readonly string fileName = "/home/jpmatos/Documents/SM/Trab1/corpusSM2021/pg3333.txt";
+        //private static readonly string fileName = "/home/jpmatos/Documents/SM/Trab1/corpusSM2021/34767-0.txt";
         //private static readonly string fileName = "/home/jpmatos/Documents/SM/Trab1/testfile.txt";
-        private static int ex = 3;
+        private static int ex = 2;
         
         public static void Main(string[] args)
         {

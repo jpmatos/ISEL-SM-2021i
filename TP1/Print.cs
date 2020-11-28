@@ -25,7 +25,7 @@ namespace SMTP1
             for (int i = 0; i < (symbolsSorted.Count > 5 ? 5 : symbolsSorted.Count); i++)
             {
                 Console.WriteLine(
-                    $"{i + 1}º: '{Convert.ToChar(symbolsSorted[i].Key)}' (Count: {symbolsSorted[i].Value})");
+                    $"{i + 1}º: '{symbolsSorted[i].Key}' ({Convert.ToByte(symbolsSorted[i].Key)}) (Count: {symbolsSorted[i].Value})");
                 totalCount += symbolsSorted[i].Value;
             }
 
@@ -43,34 +43,46 @@ namespace SMTP1
             Console.WriteLine("----------");
         }
 
-        public static void PrintSourceAndSequenceEntropy(int fileSymbolsCountCount, int fileSum,
-            int sequenceSymbolsCountCount, int sequenceSum, in double entropy, in double entropyMfo,
-            in double entropySeq,
-            in double entropyMfoSeq)
-        {
-            Console.WriteLine("-----File-----");
-            PrintSymbolCount(fileSymbolsCountCount, fileSum);
-            PrintEntropy(entropy);
-            PrintEntropyMarkovFirst(entropyMfo);
-            Console.WriteLine("-----New Sequence-----");
-            PrintSymbolCount(sequenceSymbolsCountCount, sequenceSum);
-            PrintEntropy(entropySeq);
-            PrintEntropyMarkovFirst(entropyMfoSeq);
-        }
-
         public static void PrintCompressionLengths(in long sourceLengthUncompressed, in long sourceLengthCompressed,
-            in long sequenceLengthUncompressed, in long sequenceLengthCompressed)
+            in long sequenceFoLengthUncompressed, in long sequenceFoLengthCompressed,
+            in long sequenceSoLengthUncompressed, in long sequenceSoLengthCompressed)
         {
             Console.WriteLine($"Source Length Uncompressed: '{sourceLengthUncompressed}'");
             Console.WriteLine($"Source Length Compressed: '{sourceLengthCompressed}'");
-            Console.WriteLine($"Sequence Length Uncompressed: '{sequenceLengthUncompressed}'");
-            Console.WriteLine($"Sequence Length Compressed: '{sequenceLengthCompressed}'");
+            Console.WriteLine($"Sequence First Order Length Uncompressed: '{sequenceFoLengthUncompressed}'");
+            Console.WriteLine($"Sequence First Order Length Compressed: '{sequenceFoLengthCompressed}'");
+            Console.WriteLine($"Sequence Second Order Length Uncompressed: '{sequenceSoLengthUncompressed}'");
+            Console.WriteLine($"Sequence Second Order Length Compressed: '{sequenceSoLengthCompressed}'");
         }
 
         public static void PrintSymbolCount(in int symbolsCountCount, int sum)
         {
             Console.WriteLine($"Total Different Symbols: {symbolsCountCount}");
             Console.WriteLine($"Total Symbol Count: {sum}");
+        }
+
+        public static void PrintSourceAndSequenceEntropy(
+            in int symbolsCount, int symbolsCountSum, in double entropySource, in double entropyMfoSource, 
+            in int symbolsCountSequenceFoCount, int symbolsCountSequenceFoCountSum, in double entropySequenceFo, in double entropyMfoSequenceFo, 
+            in int symbolsCountSequenceSoCount, int symbolsCountSequenceSoCountSum, in double entropySequenceSo, in double entropyMfoSequenceSo)
+        {
+            Console.WriteLine("-----File-----");
+            PrintSymbolCount(symbolsCount, symbolsCountSum);
+            PrintEntropy(entropySource);
+            PrintEntropyMarkovFirst(entropyMfoSource);
+            Console.WriteLine("-----New First Order Sequence-----");
+            PrintSymbolCount(symbolsCountSequenceFoCount, symbolsCountSequenceFoCountSum);
+            PrintEntropy(entropySequenceFo);
+            PrintEntropyMarkovFirst(entropyMfoSequenceFo);
+            Console.WriteLine("-----New Second Order Sequence-----");
+            PrintSymbolCount(symbolsCountSequenceSoCount, symbolsCountSequenceSoCountSum);
+            PrintEntropy(entropySequenceSo);
+            PrintEntropyMarkovFirst(entropyMfoSequenceSo);
+        }
+
+        public static void PrintFileName(string fileName)
+        {
+            Console.WriteLine($"File '{fileName}'");
         }
     }
 }

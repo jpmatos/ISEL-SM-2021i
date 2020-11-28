@@ -15,6 +15,7 @@ namespace SMTP1
                 fileName = Console.ReadLine();
             }
             FileInfo file = new FileInfo(fileName);
+            Print.PrintFileName(file.Name);
             byte[] sourceArray = File.ReadAllBytes(file.FullName);
             return sourceArray.ToList();
         }
