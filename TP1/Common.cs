@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace SMTP1
 {
@@ -101,6 +102,22 @@ namespace SMTP1
                     lastSymbol = currSymbol;
                 }
             return symbolsCountMfo;
+        }
+
+        internal static long GetCompressionLength(List<byte> source, out long lengthUncompressed)
+        {
+            using MemoryStream unZippedChunk = new MemoryStream(source.ToArray());
+            lengthUncompressed = unZippedChunk.Length;
+
+            using MemoryStream zippedChunk = new MemoryStream();
+            using ZipOutputStream zipOutputStream = new ZipOutputStream(zippedChunk);
+            zipOutputStream.SetLevel(9);
+
+            ZipEntry entry = new ZipEntry("name");
+            zipOutputStream.PutNextEntry(entry);
+
+            unZippedChunk.CopyTo(zipOutputStream);
+            return zipOutputStream.Length;
         }
     }
 }

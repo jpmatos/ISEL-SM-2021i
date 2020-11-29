@@ -41,29 +41,13 @@ namespace SMTP1
                 symbolsCountSequenceSo.Count,symbolsCountSequenceSo.Values.Sum(), entropySequenceSo, entropyMfoSequenceSo);
 
             //c.
-            long sourceLengthCompressed = GetCompressionLength(source, out long sourceLengthUncompressed);
-            long sequenceFoLengthCompressed = GetCompressionLength(sequenceFirstOrder, out long sequenceFoLengthUncompressed);
-            long sequenceSoLengthCompressed = GetCompressionLength(sequenceSecondOrder, out long sequenceSoLengthUncompressed);
+            long sourceLengthCompressed = Common.GetCompressionLength(source, out long sourceLengthUncompressed);
+            long sequenceFoLengthCompressed = Common.GetCompressionLength(sequenceFirstOrder, out long sequenceFoLengthUncompressed);
+            long sequenceSoLengthCompressed = Common.GetCompressionLength(sequenceSecondOrder, out long sequenceSoLengthUncompressed);
             
             Print.PrintCompressionLengths(sourceLengthUncompressed, sourceLengthCompressed,
                 sequenceFoLengthUncompressed, sequenceFoLengthCompressed,
                 sequenceSoLengthUncompressed, sequenceSoLengthCompressed);
-        }
-
-        private static long GetCompressionLength(List<byte> source, out long lengthUncompressed)
-        {
-            using MemoryStream unZippedChunk = new MemoryStream(source.ToArray());
-            lengthUncompressed = unZippedChunk.Length;
-
-            using MemoryStream zippedChunk = new MemoryStream();
-            using ZipOutputStream zipOutputStream = new ZipOutputStream(zippedChunk);
-            zipOutputStream.SetLevel(9);
-
-            ZipEntry entry = new ZipEntry("name");
-            zipOutputStream.PutNextEntry(entry);
-
-            unZippedChunk.CopyTo(zipOutputStream);
-            return zipOutputStream.Length;
         }
 
         private static List<byte> GenerateClaudeShannonFirstOrderSequence(List<byte> book)
