@@ -1,0 +1,13 @@
+a)
+    Palavras de código mais curtas precedem as mais longas
+    Palavras de código com o mesmo comprimento seguem a ordenaçáo lexica do alfabeto
+    As duas palavras de codigo menos provaveis tem o mesmo numero de bits
+
+b)
+    P(A)=P(B)=P(C)=P(D)=P(E)=P(F)=1/6
+    Lh = E P(i) * L(i) = 1/6 * 1 + 1/6 * 2 + 1/6 * 3 + 1/6 * 4 + 1/6 * 5 * 2
+        = 1/6 + 2/6 + 3/6 + 4/6 + 10/6
+        = 20/6 = 10/3 = 3.33(...)
+
+c)
+    O código canonico de Huffman, para além de ter vantagens por ser um código de Huffman, também tem a vantagem de que o descodificador náo necessita da tabela que indica a codificaçao de cada simbolo, apenas necessita da probabilidade de cada simbolo.

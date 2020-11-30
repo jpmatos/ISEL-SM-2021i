@@ -31,6 +31,9 @@ namespace SMTP1
                 case 4:
                     Ex4.Entry();
                     break;
+                case 7:
+                    Ex7.Entry(fileName);
+                    break;
             }
         }
     }

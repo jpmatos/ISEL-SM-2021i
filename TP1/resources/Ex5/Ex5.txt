@@ -1,0 +1,11 @@
+b)
+    Lh = Lbl + Lep * N
+    Lbl = E P(Xi)*L(Xi) = 2,9208184
+    Lep = E P(Xi)*L(Xi) = 3.4 * N
+    Lh = 2,9208184 + (3,4N)
+
+c)
+    42390 - 1000100111111000
+    41462 - 1000011001100010
+    
+    O descodificador tem de saber que o primeiro bit é do codigo BenforLaw Huffman? Será que temos de combinar ambos num unico codigo Huffman (0-9 + 1-9, 19 no total, mas a probabilidade nao soma 100%)
