@@ -11,14 +11,41 @@ namespace SMTP1
             {
                 double p = 0.1 * i;
                 double entropy = CalculateMfoEntropy(p);
-                long lengthCompressed = CalculateCompressedAndUncompressedLength(p, out long lengthUncompressed);
+                List<byte> sequence = GenerateSequence(p);
+                long lengthCompressed = Compression.GetZLibCompressionLength(sequence, out long lengthUncompressed);
 
                 Console.WriteLine(
                     $"p='{p:N1}' MFO Entropy: '{entropy}'. Uncompressed: '{lengthUncompressed}'. Compressed: '{lengthCompressed}'");
             }
         }
 
-        private static long CalculateCompressedAndUncompressedLength(double p, out long lengthUncompressed)
+        private static double CalculateMfoEntropy(double p)
+        {
+            double entropy = 0;
+            for (int j = 0; j < 255; j++)
+            {
+                if (p == 0)
+                    entropy += (1d / 255) *
+                               (((1d - p) / 2) * Math.Log2(1 / ((1d - p) / 2)) +
+                                ((1d - p) / 2) * Math.Log2(1 / ((1d - p) / 2)));
+                else if (p == 1)
+                    entropy += (1d / 255) *
+                               ((p / 3) * Math.Log2(1 / (p / 3)) +
+                                (p / 3) * Math.Log2(1 / (p / 3)) +
+                                (p / 3) * Math.Log2(1 / (p / 3)));
+                else
+                    entropy += (1d / 255) *
+                               ((p / 3) * Math.Log2(1 / (p / 3)) +
+                                (p / 3) * Math.Log2(1 / (p / 3)) +
+                                (p / 3) * Math.Log2(1 / (p / 3)) +
+                                ((1d - p) / 2) * Math.Log2(1 / ((1d - p) / 2)) +
+                                ((1d - p) / 2) * Math.Log2(1 / ((1d - p) / 2)));
+            }
+
+            return entropy;
+        }
+
+        private static List<byte> GenerateSequence(in double p)
         {
             //intervals
             double first = 0d;
@@ -85,34 +112,7 @@ namespace SMTP1
                 sequence.Add(current);
             }
 
-            long lengthCompressed = Common.GetCompressionLength(sequence, out lengthUncompressed);
-            return lengthCompressed;
-        }
-
-        private static double CalculateMfoEntropy(double p)
-        {
-            double entropy = 0;
-            for (int j = 0; j < 255; j++)
-            {
-                if (p == 0)
-                    entropy += (1d / 255) *
-                               (((1d - p) / 2) * Math.Log2(1 / ((1d - p) / 2)) +
-                                ((1d - p) / 2) * Math.Log2(1 / ((1d - p) / 2)));
-                else if (p == 1)
-                    entropy += (1d / 255) *
-                               ((p / 3) * Math.Log2(1 / (p / 3)) +
-                                (p / 3) * Math.Log2(1 / (p / 3)) +
-                                (p / 3) * Math.Log2(1 / (p / 3)));
-                else
-                    entropy += (1d / 255) *
-                               ((p / 3) * Math.Log2(1 / (p / 3)) +
-                                (p / 3) * Math.Log2(1 / (p / 3)) +
-                                (p / 3) * Math.Log2(1 / (p / 3)) +
-                                ((1d - p) / 2) * Math.Log2(1 / ((1d - p) / 2)) +
-                                ((1d - p) / 2) * Math.Log2(1 / ((1d - p) / 2)));
-            }
-
-            return entropy;
+            return sequence;
         }
     }
 }

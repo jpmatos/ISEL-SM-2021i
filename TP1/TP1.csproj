@@ -11,4 +11,16 @@
       <PackageReference Include="SharpZipLib" Version="1.3.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Util\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Util\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Util\**" />
+    </ItemGroup>
+
 </Project>

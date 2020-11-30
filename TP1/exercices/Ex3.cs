@@ -41,9 +41,9 @@ namespace SMTP1
                 symbolsCountSequenceSo.Count,symbolsCountSequenceSo.Values.Sum(), entropySequenceSo, entropyMfoSequenceSo);
 
             //c.
-            long sourceLengthCompressed = Common.GetCompressionLength(source, out long sourceLengthUncompressed);
-            long sequenceFoLengthCompressed = Common.GetCompressionLength(sequenceFirstOrder, out long sequenceFoLengthUncompressed);
-            long sequenceSoLengthCompressed = Common.GetCompressionLength(sequenceSecondOrder, out long sequenceSoLengthUncompressed);
+            long sourceLengthCompressed = Compression.GetZLibCompressionLength(source, out long sourceLengthUncompressed);
+            long sequenceFoLengthCompressed = Compression.GetZLibCompressionLength(sequenceFirstOrder, out long sequenceFoLengthUncompressed);
+            long sequenceSoLengthCompressed = Compression.GetZLibCompressionLength(sequenceSecondOrder, out long sequenceSoLengthUncompressed);
             
             Print.PrintCompressionLengths(sourceLengthUncompressed, sourceLengthCompressed,
                 sequenceFoLengthUncompressed, sequenceFoLengthCompressed,
