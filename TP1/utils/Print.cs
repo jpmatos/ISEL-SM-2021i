@@ -84,5 +84,18 @@ namespace SMTP1
         {
             Console.WriteLine($"File '{fileName}'");
         }
+
+        public static void PrintCompressionResults(string method, in long lengthUncompressed, in long lengthCompressed)
+        {
+            Console.WriteLine($"{method} - Uncompressed: '{lengthUncompressed}'. Compressed: '{lengthCompressed}'. " +
+                              $"Ratio: '{(float)lengthUncompressed/lengthCompressed:N2}:1' " +
+                              $"Percentage Removed: '{100f - (float)lengthCompressed/lengthUncompressed*100:N2}%'");
+        }
+
+        public static void PrintPResult(in double p, in double entropy, in long lengthUncompressed, in long lengthCompressed)
+        {
+            Console.WriteLine(
+                $"p='{p:N1}' MFO Entropy: '{entropy}'. Uncompressed: '{lengthUncompressed}'. Compressed: '{lengthCompressed}'");
+        }
     }
 }

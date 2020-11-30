@@ -7,6 +7,7 @@ namespace SMTP1
     {
         public static void Entry()
         {
+            //4.
             for (int i = 0; i <= 10; i++)
             {
                 double p = 0.1 * i;
@@ -14,8 +15,7 @@ namespace SMTP1
                 List<byte> sequence = GenerateSequence(p);
                 long lengthCompressed = Compression.GetZLibCompressionLength(sequence, out long lengthUncompressed);
 
-                Console.WriteLine(
-                    $"p='{p:N1}' MFO Entropy: '{entropy}'. Uncompressed: '{lengthUncompressed}'. Compressed: '{lengthCompressed}'");
+                Print.PrintPResult(p, entropy, lengthUncompressed, lengthCompressed);
             }
         }
 
