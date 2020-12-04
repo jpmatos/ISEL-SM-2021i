@@ -88,7 +88,9 @@ namespace SMTP1
         public static void PrintCompressionResults(string method, in long lengthUncompressed, in long lengthCompressed)
         {
             Console.WriteLine($"{method} - Uncompressed: '{lengthUncompressed}'. Compressed: '{lengthCompressed}'. " +
+                              $"Compression bit/byte: '{((float)lengthCompressed /lengthUncompressed/8)} bit/byte' " +
                               $"Ratio: '{(float)lengthUncompressed/lengthCompressed:N2}:1' " +
+                              $"Factor: '{1f / ((float)lengthUncompressed/lengthCompressed):N4}' " +
                               $"Percentage Removed: '{100f - (float)lengthCompressed/lengthUncompressed*100:N2}%'");
         }
 
