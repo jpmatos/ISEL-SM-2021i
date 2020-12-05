@@ -72,9 +72,10 @@ namespace SMTP1
             int index = random.Next(0, book.Count);
             byte current = book[index];
             sequence.Add(current);
-
+            int i = 0;
             foreach (var _ in book.Skip(1))
             {
+                Console.WriteLine($"{i++} - {book.Count}");
                 index = random.Next(0, book.Count);
                 for (int j = index; j <= book.Count; j++)
                 {

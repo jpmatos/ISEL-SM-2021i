@@ -8,39 +8,48 @@ namespace SMTP1
     {
         internal static void PrintEntropy(in double entropy)
         {
-            Console.WriteLine($"The Entropy is {entropy}");
+            Console.WriteLine($"The Entropy is {entropy:N6}");
             Console.WriteLine("----------");
         }
 
         internal static void PrintEntropyMarkovFirst(in double entropy)
         {
-            Console.WriteLine($"The Markov First Order Entropy is {entropy}");
+            Console.WriteLine($"The Markov First Order Entropy is {entropy:N6}");
             Console.WriteLine("----------");
         }
 
         internal static void PrintTopFive(List<KeyValuePair<char, int>> symbolsSorted)
         {
             Console.WriteLine("Top Five:");
-            int totalCount = 0;
+            //int totalCount = 0;
+            Console.Write("{");
             for (int i = 0; i < (symbolsSorted.Count > 5 ? 5 : symbolsSorted.Count); i++)
             {
-                Console.WriteLine(
-                    $"{i + 1}º: '{symbolsSorted[i].Key}' ({Convert.ToByte(symbolsSorted[i].Key)}) (Count: {symbolsSorted[i].Value})");
-                totalCount += symbolsSorted[i].Value;
+                if(i == 0)
+                    Console.Write($"{Convert.ToByte(symbolsSorted[i].Key)}");
+                else
+                    Console.Write($", {Convert.ToByte(symbolsSorted[i].Key)}");
+                // Console.WriteLine(
+                //     $"{i + 1}º: '{symbolsSorted[i].Key}' ({Convert.ToByte(symbolsSorted[i].Key)}) (Count: {symbolsSorted[i].Value})");
+                // totalCount += symbolsSorted[i].Value;
             }
 
-            Console.WriteLine($"(Total Count: {totalCount})");
+            //Console.WriteLine($"(Total Count: {totalCount})");
+            Console.Write("}");
+            Console.WriteLine();
             Console.WriteLine("----------");
         }
 
         internal static void PrintTopHalfGroup(List<KeyValuePair<char, int>> topHalfGroup)
         {
-            Console.WriteLine($"Top Half Group:");
-            foreach (var t in topHalfGroup)
-                Console.WriteLine($"'{Convert.ToChar(t.Key)}' (Count: {t.Value})");
-
-            Console.WriteLine($"(Total Count: {topHalfGroup.Select(x => x.Value).Sum()})");
-            Console.WriteLine("----------");
+            Console.WriteLine($"Top Half Group: {topHalfGroup.Count}");
+            // foreach (var t in topHalfGroup)
+            //     //Console.Write($"'{Convert.ToChar(t.Key)}', ");
+            // Console.WriteLine($"'{Convert.ToChar(t.Key)}' (Count: {t.Value})");
+            // Console.WriteLine();
+            //
+            // Console.WriteLine($"(Total Count: {topHalfGroup.Select(x => x.Value).Sum()})");
+            // Console.WriteLine("----------");
         }
 
         public static void PrintCompressionLengths(in long sourceLengthUncompressed, in long sourceLengthCompressed,
@@ -82,13 +91,14 @@ namespace SMTP1
 
         public static void PrintFileName(string fileName)
         {
-            Console.WriteLine($"File '{fileName}'");
+            Console.WriteLine($"File {fileName}");
         }
 
         public static void PrintCompressionResults(string method, in long lengthUncompressed, in long lengthCompressed)
         {
-            Console.WriteLine($"{method} - Uncompressed: '{lengthUncompressed}'. Compressed: '{lengthCompressed}'. " +
-                              $"Compression bit/byte: '{((float)lengthCompressed /lengthUncompressed/8)} bit/byte' " +
+            Console.WriteLine($"{method} - " +
+                              //$"Uncompressed: '{lengthUncompressed}'. Compressed: '{lengthCompressed}'. " +
+                              $"Compression bit/byte: '{((float)(lengthCompressed*8) /lengthUncompressed):N2} bit/byte' " +
                               $"Ratio: '{(float)lengthUncompressed/lengthCompressed:N2}:1' " +
                               $"Factor: '{1f / ((float)lengthUncompressed/lengthCompressed):N4}' " +
                               $"Percentage Removed: '{100f - (float)lengthCompressed/lengthUncompressed*100:N2}%'");

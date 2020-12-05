@@ -14,13 +14,13 @@ namespace SMTP1
             double entropy = Common.CalculateEntropy(symbolsCount);
             Print.PrintEntropy(entropy);
 
-            int divisions = 10;
+            int divisions = 4;
             for (float i = 1; i <= divisions; i++)
             {
                 int range = (int) Math.Truncate((source.Count) * (i / divisions));
                 List<byte> subSource = source.GetRange(0, range);
                 long lengthCompressedZLib = Compression.GetZLibCompressionLength(subSource, out long lengthUncompressedZLib);
-                Print.PrintCompressionResults($"ZLib {i*divisions}%", lengthUncompressedZLib, lengthCompressedZLib);
+                Print.PrintCompressionResults($"ZLib {i*25}%", lengthUncompressedZLib, lengthCompressedZLib);
 
                 if ((int)i == divisions)
                 {
@@ -35,7 +35,7 @@ namespace SMTP1
                 int range = (int) Math.Truncate((source.Count) * (i / divisions));
                 List<byte> subSource = source.GetRange(0, range);
                 long lengthCompressedLz4 = Compression.GetLz4CompressionLength(subSource, out long lengthUncompressedLz4);
-                Print.PrintCompressionResults("Lz4", lengthUncompressedLz4, lengthCompressedLz4);
+                Print.PrintCompressionResults($"Lz4 {i*25}%", lengthUncompressedLz4, lengthCompressedLz4);
 
                 if ((int)i == divisions)
                 {
