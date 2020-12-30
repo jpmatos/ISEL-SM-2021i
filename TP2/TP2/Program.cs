@@ -32,25 +32,24 @@ namespace TP2
         {
             Bitmap img1 = new Bitmap(image1.FullName);
             Bitmap img2 = new Bitmap(image2.FullName);
-            int sumSq = 0;
+            double sumSq = 0;
             for (int i = 0; i < img1.Height; i++)
             {
                 for (int j = 0; j < img1.Width; j++)
                 {
                     Color p1 = img1.GetPixel(j, i);
                     Color p2 = img2.GetPixel(j, i);
-                    int errR = p2.R - p1.R;
-                    int errG = p2.G - p1.G;
-                    int errB = p2.B - p1.B;
-                    sumSq += (errR * errR) + (errG * errG) + (errB * errB);
+                    int errR = Math.Abs(p2.R - p1.R);
+                    int errG = Math.Abs(p2.G - p1.G);
+                    int errB = Math.Abs(p2.B - p1.B);
+                    sumSq += (double)(errR * errR) / 3 + (double)(errG * errG) / 3 + (double)(errB * errB) / 3;
                 }
             }
             
-            double mse = (double) sumSq / (img1.Height * img1.Width) / 3;
-            double psnr = 20 * Math.Log10(255.0 / Math.Sqrt(mse));
+            double mse = sumSq / (img1.Height * img1.Width);
+            double psnr = 20 * Math.Log10(255d / Math.Sqrt(mse));
             
             return psnr;
-            // return 0;
         }
 
         private static FileInfo EncodeToJpeg(FileInfo input, bool quality)

@@ -23,7 +23,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecfd319d-1dd9-42be-a9b6-2d04d9b717b6" name="Default Changelist" comment="" />
+    <list default="true" id="ecfd319d-1dd9-42be-a9b6-2d04d9b717b6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP2/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TP2/Program.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,7 +109,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1609350328307</updated>
-      <workItem from="1609350341764" duration="14299000" />
+      <workItem from="1609350341764" duration="16628000" />
     </task>
     <servers />
   </component>
@@ -134,22 +137,22 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="581" y="193" width="430" height="482" key="FileChooserDialogImpl/0.0.1600.900@0.0.1600.900" timestamp="1609359308686" />
-    <state width="1558" height="221" key="GridCell.Tab.0.bottom" timestamp="1609365442535">
+    <state width="1558" height="183" key="GridCell.Tab.0.bottom" timestamp="1609368249970">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1609365442535" />
-    <state width="1558" height="221" key="GridCell.Tab.0.center" timestamp="1609365442535">
+    <state width="1558" height="183" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1609368249970" />
+    <state width="1558" height="183" key="GridCell.Tab.0.center" timestamp="1609368249970">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1609365442535" />
-    <state width="1558" height="221" key="GridCell.Tab.0.left" timestamp="1609365442535">
+    <state width="1558" height="183" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1609368249970" />
+    <state width="1558" height="183" key="GridCell.Tab.0.left" timestamp="1609368249969">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1609365442535" />
-    <state width="1558" height="221" key="GridCell.Tab.0.right" timestamp="1609365442535">
+    <state width="1558" height="183" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1609368249969" />
+    <state width="1558" height="183" key="GridCell.Tab.0.right" timestamp="1609368249970">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
-    <state width="1558" height="221" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1609365442535" />
+    <state width="1558" height="183" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1609368249970" />
     <state width="1558" height="301" key="GridCell.Tab.1.bottom" timestamp="1609365022862">
       <screen x="0" y="0" width="1600" height="900" />
     </state>
@@ -222,24 +225,5 @@
       <screen x="0" y="0" width="1600" height="900" />
     </state>
     <state x="463" y="186" width="672" height="678" key="search.everywhere.popup/0.0.1600.900@0.0.1600.900" timestamp="1609361362664" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/TP2/Program.cs</url>
-          <line>49</line>
-          <properties documentPath="$PROJECT_DIR$/TP2/Program.cs" initialLine="48">
-            <startOffsets>
-              <option value="1797" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1851" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
