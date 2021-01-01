@@ -12,7 +12,7 @@ namespace TP2
     {
         static void Main(string[] args)
         {
-            string path = "/home/jpmatos/Documents/SM/Trab2/kodak/kodim01.png";
+            string path = "C:\\Users\\jpmatos\\Files\\Kodim\\kodim01.png";
             //string path = "";
             if (String.IsNullOrEmpty(path))
             {
@@ -53,11 +53,11 @@ namespace TP2
         private static FileInfo EncodeToWebp(FileInfo input, string append, bool lossless)
         {
             string newFile =
-                $"{input.DirectoryName}/{Path.GetFileNameWithoutExtension(input.Name)}_{append}.webp";
+                $"{input.DirectoryName}\\{Path.GetFileNameWithoutExtension(input.Name)}_{append}.webp";
             
             using (var webPFileStream = new FileStream(newFile, FileMode.Create))
             {
-                using (ImageFactory imageFactory = new ImageFactory(preserveExifData: false))
+                using (ImageFactory imageFactory = new ImageFactory(false))
                 {
                     imageFactory.Load(input.OpenRead())
                         .Format(new WebPFormat())
@@ -65,12 +65,6 @@ namespace TP2
                         .Save(webPFileStream);
                 }
             }
-            
-            // Bitmap bmp = new Bitmap(input.FullName);
-            // using (WebP webp = new WebP())
-            //     webp.Save(bmp, newFile, 80);
-            //
-            // return new FileInfo(newFile);
             return new FileInfo(newFile);
         }
 
@@ -105,7 +99,7 @@ namespace TP2
             myEncoderParameters = new EncoderParameters(1);
 
             string newFile =
-                $"{input.DirectoryName}/result/{Path.GetFileNameWithoutExtension(input.Name)}_{append}.jpg";
+                $"{input.DirectoryName}\\result\\{Path.GetFileNameWithoutExtension(input.Name)}_{append}.jpg";
 
             if (File.Exists(newFile))
             {
@@ -135,8 +129,24 @@ namespace TP2
 
         private static double CalculatePsnr(FileInfo image1, FileInfo image2)
         {
-            Bitmap img1 = new Bitmap(image1.FullName);
-            Bitmap img2 = new Bitmap(image2.FullName);
+            Bitmap img1;
+            if (image1.Extension == ".webp")
+            {
+                byte[] img1Bytes = File.ReadAllBytes(image1.FullName);
+                img1 = new Imazen.WebP.SimpleDecoder().DecodeFromBytes(img1Bytes, img1Bytes.Length);
+            }
+            else
+                img1 = new Bitmap(image1.FullName);
+            
+            Bitmap img2;
+            if (image2.Extension == ".webp")
+            {
+                byte[] img2Bytes = File.ReadAllBytes(image2.FullName);
+                img2 = new Imazen.WebP.SimpleDecoder().DecodeFromBytes(img2Bytes, img2Bytes.Length);
+            }
+            else
+                img2 = new Bitmap(image2.FullName);
+            
             double sumSq = 0;
             for (int i = 0; i < img1.Height; i++)
             {

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.2/resharper-host/local/Transient/Rider/v202/SolutionCaches/_TP2.-225817711.00" t="ExcludeRecursive" />
-    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
-    <e p="$PROJECT_DIR$" t="IncludeFlat">
+    <e p="C:\Users\jpmatos\AppData\local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\jpmatos\AppData\local\JetBrains\Rider2020.3\resharper-host\local\Transient\Rider\v203\SolutionCaches\_TP2.-1422550620.00" t="ExcludeRecursive" />
+    <e p="C:\Users\jpmatos\RiderProjects\ISEL-SM-2021i\TP2" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
       <e p="TP2" t="IncludeRecursive">
-        <e p="Program.cs" t="Include" />
-        <e p="TP2.csproj" t="IncludeRecursive" />
-        <e p="WebPWrapper.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="libwebp_x64.dll" t="Include" />
-        <e p="libwebp_x86.dll" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
@@ -19,9 +14,11 @@
             </e>
           </e>
         </e>
+        <e p="Program.cs" t="Include" />
+        <e p="TP2.csproj" t="IncludeRecursive" />
+        <e p="WebPWrapper.cs" t="Include" />
       </e>
       <e p="TP2.sln" t="IncludeFlat" />
-      <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>
 </project>
