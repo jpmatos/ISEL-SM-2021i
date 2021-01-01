@@ -2,7 +2,9 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using Image = System.Drawing.Image;
+using ImageProcessor;
+using ImageProcessor.Plugins.WebP.Imaging.Formats;
+using WebPWrapper;
 
 namespace TP2
 {
@@ -18,17 +20,120 @@ namespace TP2
                 path = Console.ReadLine();
             }
             
-            FileInfo input = new FileInfo(path);
-            FileInfo outputLossless = EncodeToJpeg(input, true);
-            FileInfo outputLossy = EncodeToJpeg(input, false);
+            FileInfo png = new FileInfo(path);
             
-            double pstrLossless = CalculatePSNR(input, outputLossless);
-            double pstrLossy = CalculatePSNR(input, outputLossy);
-            Console.WriteLine($"Lossless JPEG Distortion: {pstrLossless}");
-            Console.WriteLine($"Lossy JPEG Distortion: {pstrLossy}");
+            //PNG to JPEG varying quality
+            //PngToJpegVaryQuality(png);
+            
+            FileInfo pngToJpeg = EncodeToJpeg(png, $"ToJpeg", 100, true);
+            FileInfo pngToJpegToWebpLossy = EncodeToWebp(pngToJpeg, "ToWebpLossy", false);
+            double pngToJpeg_pngToJpegToWebpLossy_psnr = CalculatePsnr(pngToJpeg, pngToJpegToWebpLossy);
+            double png_pngToJpegToWebpLossy_psnr = CalculatePsnr(png, pngToJpegToWebpLossy);
+            
+            Console.WriteLine($"PNG to JPEG to WebP. Distortion (PNGtoJPEG): {pngToJpeg_pngToJpegToWebpLossy_psnr}; " +
+                              $"Distortion (PNG): {png_pngToJpegToWebpLossy_psnr}");
+
+            // FileInfo pngToJpegLossless = EncodeToJpeg(png, "ToJpegLossless", true);
+            // double pngToJpegLosslessPstr = CalculatePsnr(png, pngToJpegLossless);
+            // Console.WriteLine($"PNG to Lossless JPEG Distortion: {pngToJpegLosslessPstr}");
         }
 
-        private static double CalculatePSNR(FileInfo image1, FileInfo image2)
+        private static void PngToJpegVaryQuality(FileInfo png)
+        {
+            for (int i = 0; i <= 4; i++)
+            {
+                FileInfo pngToJpegVar = EncodeToJpeg(png, $"ToJpeg{i * 25}", i * 25);
+                double pngToJpegVarPstr = CalculatePsnr(png, pngToJpegVar);
+                float sizeDifference = ((float)(png.Length - pngToJpegVar.Length) / png.Length * 100);
+            
+                Console.WriteLine($"PNG to JPEG{i * 25}. Distortion: {pngToJpegVarPstr}; Reduction: {sizeDifference:N2}");   
+            }
+        }
+
+        private static FileInfo EncodeToWebp(FileInfo input, string append, bool lossless)
+        {
+            string newFile =
+                $"{input.DirectoryName}/{Path.GetFileNameWithoutExtension(input.Name)}_{append}.webp";
+            
+            using (var webPFileStream = new FileStream(newFile, FileMode.Create))
+            {
+                using (ImageFactory imageFactory = new ImageFactory(preserveExifData: false))
+                {
+                    imageFactory.Load(input.OpenRead())
+                        .Format(new WebPFormat())
+                        .Quality(100)
+                        .Save(webPFileStream);
+                }
+            }
+            
+            // Bitmap bmp = new Bitmap(input.FullName);
+            // using (WebP webp = new WebP())
+            //     webp.Save(bmp, newFile, 80);
+            //
+            // return new FileInfo(newFile);
+            return new FileInfo(newFile);
+        }
+
+        private static FileInfo EncodeToJpeg(FileInfo input, string append, long quality, bool defaultQuality = false)
+        {
+            Image myPng;
+            ImageCodecInfo myImageCodecInfo;
+            Encoder myEncoder;
+            EncoderParameter myEncoderParameter;
+            EncoderParameters myEncoderParameters;
+
+            // Create a Bitmap object based on a BMP file.
+            myPng = Image.FromFile(input.FullName);
+
+            // Get an ImageCodecInfo object that represents the JPEG codec.
+            myImageCodecInfo = GetEncoderInfo("image/jpeg");
+
+            // Create an Encoder object based on the GUID
+            // for the Quality parameter category.
+            if(!defaultQuality)
+                myEncoder = Encoder.Quality;
+            else
+            {
+                quality = 100;
+                myEncoder = Encoder.Compression;
+            }
+
+            // Create an EncoderParameters object.
+            // An EncoderParameters object has an array of EncoderParameter
+            // objects. In this case, there is only one
+            // EncoderParameter object in the array.
+            myEncoderParameters = new EncoderParameters(1);
+
+            string newFile =
+                $"{input.DirectoryName}/result/{Path.GetFileNameWithoutExtension(input.Name)}_{append}.jpg";
+
+            if (File.Exists(newFile))
+            {
+                new FileInfo(newFile).Delete();
+            }
+
+            // Save the bitmap as a JPEG file
+            myEncoderParameter = new EncoderParameter(myEncoder, quality);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            myPng.Save(newFile, myImageCodecInfo, myEncoderParameters);
+            
+            return new FileInfo(newFile);
+        }
+
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for(j = 0; j < encoders.Length; ++j)
+            {
+                if(encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+
+        private static double CalculatePsnr(FileInfo image1, FileInfo image2)
         {
             Bitmap img1 = new Bitmap(image1.FullName);
             Bitmap img2 = new Bitmap(image2.FullName);
@@ -50,62 +155,6 @@ namespace TP2
             double psnr = 20 * Math.Log10(255d / Math.Sqrt(mse));
             
             return psnr;
-        }
-
-        private static FileInfo EncodeToJpeg(FileInfo input, bool quality)
-        {
-            Image myPng;
-            ImageCodecInfo myImageCodecInfo;
-            Encoder myEncoder;
-            EncoderParameter myEncoderParameter;
-            EncoderParameters myEncoderParameters;
-
-            // Create a Bitmap object based on a BMP file.
-            myPng = Image.FromFile(input.FullName);
-
-            // Get an ImageCodecInfo object that represents the JPEG codec.
-            myImageCodecInfo = GetEncoderInfo("image/jpeg");
-
-            // Create an Encoder object based on the GUID
-            // for the Quality parameter category.
-            if(quality)
-                myEncoder = Encoder.Quality;
-            else 
-                myEncoder = Encoder.Compression;
-
-            // Create an EncoderParameters object.
-            // An EncoderParameters object has an array of EncoderParameter
-            // objects. In this case, there is only one
-            // EncoderParameter object in the array.
-            myEncoderParameters = new EncoderParameters(1);
-
-            string newfile =
-                $"{input.DirectoryName}/result/{input.Name.Replace(input.Extension, "")}_{(quality ? "lossless": "loss")}.jpg";
-
-            if (File.Exists(newfile))
-            {
-                new FileInfo(newfile).Delete();
-            }
-
-            // Save the bitmap as a JPEG file with quality level 100.
-            myEncoderParameter = new EncoderParameter(myEncoder, 100L);
-            myEncoderParameters.Param[0] = myEncoderParameter;
-            myPng.Save(newfile, myImageCodecInfo, myEncoderParameters);
-            
-            return new FileInfo(newfile);
-        }
-
-        private static ImageCodecInfo GetEncoderInfo(String mimeType)
-        {
-            int j;
-            ImageCodecInfo[] encoders;
-            encoders = ImageCodecInfo.GetImageEncoders();
-            for(j = 0; j < encoders.Length; ++j)
-            {
-                if(encoders[j].MimeType == mimeType)
-                    return encoders[j];
-            }
-            return null;
         }
     }
 }

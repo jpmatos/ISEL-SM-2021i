@@ -8,7 +8,10 @@
       <e p="TP2" t="IncludeRecursive">
         <e p="Program.cs" t="Include" />
         <e p="TP2.csproj" t="IncludeRecursive" />
+        <e p="WebPWrapper.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="libwebp_x64.dll" t="Include" />
+        <e p="libwebp_x86.dll" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
