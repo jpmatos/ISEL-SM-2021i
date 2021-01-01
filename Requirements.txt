@@ -1,0 +1,18 @@
+-PNG
+    -To JPEG (com perda).
+     Variar Qualidade e analisar PSNR (0, 25, 50, 75, 100).
+        -To WebP (com perda e maxima qualidade). (1)
+         Analisar PSNR e compressão com a PNG e com a JPEG
+         Cofidicar o erro em relação a JPEG (JPEG->WebP com perda) usando WebP (sem perda). (2)
+         Codificar o JPEG com WebP (sem perda). (3)
+         Comparar a compressão obtida entre WebP (com perda e maxima qualidade) (1) e o erro codificado (2), com a codificação do JPEG em WebP (sem perda) (3).
+
+         -Codificar o erro da imagem (PNG -> JPEG) usando WebP (sem perda).
+          Codificar o PNG com WebP (sem perda).
+          Comparar a compressão entre ambos.
+
+    -To WebP (com perda e maxima qualidade)
+     Variar Qualidade e analisar PSNR (0, 25, 50, 75, 100).
+        -To JPEG
+         Variar Qualidade e analisar PSNR e compressão em relação ao WebP e ao PNG
+         Comparar com a codificação JPEG do PNG
