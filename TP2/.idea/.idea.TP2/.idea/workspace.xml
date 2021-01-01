@@ -23,13 +23,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecfd319d-1dd9-42be-a9b6-2d04d9b717b6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP2/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TP2/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP2/TP2.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TP2/TP2.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="ecfd319d-1dd9-42be-a9b6-2d04d9b717b6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,14 +33,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65072C4B-7F11-4AB9-B476-E9EF7250D2BB/10/Gdiplus.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65072C4B-7F11-4AB9-B476-E9EF7250D2BB/8/Bitmap.cs" root0="SKIP_HIGHLIGHTING" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <changedPaths>
-      <option value="$PROJECT_DIR$/TP2/TP2.csproj" />
-      <option value="$PROJECT_DIR$/TP2/Program.cs" />
-    </changedPaths>
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87DBB896-6B20-4A14-9B6A-7AB43642646D/9f/2bc351a1/FileStream.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D9A30B68-93CB-46AB-A0F3-44FA57BDB243/75/GdiplusNative.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D9A30B68-93CB-46AB-A0F3-44FA57BDB243/D/Gdiplus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B171A991-0D49-4DB6-AAA0-21FA61085D00/ee/656e7616/GDIPlus.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D9A30B68-93CB-46AB-A0F3-44FA57BDB243/5/Bitmap.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1mO2TGHsarTY2ytLKEYgxFXrXvo" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -142,5 +133,23 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1558" height="183" key="GridCell.Tab.0.bottom" timestamp="1609539691926">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1558" height="183" key="GridCell.Tab.0.bottom/0.0.1600.900@0.0.1600.900" timestamp="1609539691926" />
+    <state width="1558" height="183" key="GridCell.Tab.0.center" timestamp="1609539691921">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1558" height="183" key="GridCell.Tab.0.center/0.0.1600.900@0.0.1600.900" timestamp="1609539691921" />
+    <state width="1558" height="183" key="GridCell.Tab.0.left" timestamp="1609539691920">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1558" height="183" key="GridCell.Tab.0.left/0.0.1600.900@0.0.1600.900" timestamp="1609539691920" />
+    <state width="1558" height="183" key="GridCell.Tab.0.right" timestamp="1609539691925">
+      <screen x="0" y="0" width="1600" height="900" />
+    </state>
+    <state width="1558" height="183" key="GridCell.Tab.0.right/0.0.1600.900@0.0.1600.900" timestamp="1609539691925" />
   </component>
 </project>
