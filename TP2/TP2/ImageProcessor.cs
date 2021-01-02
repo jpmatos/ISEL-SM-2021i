@@ -10,13 +10,14 @@ namespace TP2
         public static FileInfo EncodeToWebp(FileInfo input, string append, bool lossless)
         {
             string newFile =
-                $"{input.DirectoryName}\\{Path.GetFileNameWithoutExtension(input.Name)}_{append}.webp";
+                $"{input.DirectoryName}\\{(input.Directory.Name == "result" ? "" : "result\\")}{Path.GetFileNameWithoutExtension(input.Name)}_{append}.webp";
             
             if (File.Exists(newFile))
                 new FileInfo(newFile).Delete();
 
             using var webPFileStream = new FileStream(newFile, FileMode.Create);
-            new Imazen.WebP.SimpleEncoder().Encode(new Bitmap(input.FullName), webPFileStream, lossless ? -1f : 100f);
+            using Bitmap bitmap = new Bitmap(input.FullName);
+            new Imazen.WebP.SimpleEncoder().Encode(bitmap, webPFileStream, lossless ? -1f : 100f);
             return new FileInfo(newFile);
         }
 
@@ -51,7 +52,7 @@ namespace TP2
             myEncoderParameters = new EncoderParameters(1);
 
             string newFile =
-                $"{input.DirectoryName}\\result\\{Path.GetFileNameWithoutExtension(input.Name)}_{append}.jpg";
+                $"{input.DirectoryName}\\{(input.Directory.Name == "result" ? "" : "result\\")}{Path.GetFileNameWithoutExtension(input.Name)}_{append}.jpg";
 
             if (File.Exists(newFile))
             {
@@ -63,6 +64,7 @@ namespace TP2
             myEncoderParameters.Param[0] = myEncoderParameter;
             myPng.Save(newFile, myImageCodecInfo, myEncoderParameters);
             
+            myPng.Dispose();
             return new FileInfo(newFile);
         }
 
@@ -88,7 +90,7 @@ namespace TP2
             
             
             string newFile =
-                $"{image1.DirectoryName}\\Error_{Path.GetFileNameWithoutExtension(image1.Name)}_{Path.GetFileNameWithoutExtension(image2.Name)}.webp";
+                $"{image1.DirectoryName}\\{(image1.Directory.Name == "result" ? "" : "result\\")}{Path.GetFileNameWithoutExtension(image1.Name)}_ErrorDiff_{Path.GetFileNameWithoutExtension(image2.Name)}.webp";
             
             if (File.Exists(newFile))
                 new FileInfo(newFile).Delete();
@@ -112,6 +114,9 @@ namespace TP2
             using var webPFileStream = new FileStream(newFile, FileMode.Create);
             new Imazen.WebP.SimpleEncoder().Encode(img3, webPFileStream, -1f);
             
+            img1.Dispose();
+            img2.Dispose();
+            img3.Dispose();
             return new FileInfo(newFile);
         }
 
@@ -152,6 +157,8 @@ namespace TP2
             double mse = sumSq / (img1.Height * img1.Width);
             double psnr = 20 * Math.Log10(255d / Math.Sqrt(mse));
             
+            img1.Dispose();
+            img2.Dispose();
             return psnr;
         }
 

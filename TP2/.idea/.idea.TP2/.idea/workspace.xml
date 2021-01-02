@@ -25,9 +25,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ecfd319d-1dd9-42be-a9b6-2d04d9b717b6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP2/ImageProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TP2/ImageProcessor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP2/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TP2/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP2/TP2.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TP2/TP2.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP2/WebPWrapper.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,8 +130,16 @@
       <workItem from="1609350341764" duration="26053000" />
       <workItem from="1609536357218" duration="290000" />
       <workItem from="1609538156446" duration="1145000" />
-      <workItem from="1609563809905" duration="3728000" />
+      <workItem from="1609563809905" duration="6730000" />
     </task>
+    <task id="LOCAL-00001" summary="Migrated to .net. Created ImageProcessor. Done 1.1.1">
+      <created>1609567869745</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609567869745</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,5 +161,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Migrated to .net. Created ImageProcessor. Done 1.1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Migrated to .net. Created ImageProcessor. Done 1.1.1" />
   </component>
 </project>
