@@ -5,11 +5,10 @@ namespace TP2
 {
     static class Program
     {
-        static string _path = "";
-        private static void Main()
+        private static void Main(string[] args)
         {
             //Read PNG
-            FileInfo png = ReadPng(_path);
+            FileInfo png = ReadPng(args.Length > 0 ? args[0] : "");
             
             //Set Console.Write to text file
             SetConsoleWriteToFile(png);
@@ -69,27 +68,27 @@ namespace TP2
         private static void PngToWebpLossyToJpegVaryQualityAndMore(FileInfo png)
         {
             Console.WriteLine("2.1.1 PNG to WebPLossy to JPEG Varying");
-            Console.WriteLine("PNG-PNGtoWebPLossyToJPEG");
             FileInfo pngToWebpLossy = ImageProcessor.EncodeToWebp(png, $"ToWebpLossy", 100);
-            for (int i = 0; i <= 4; i++)
-            {
-                FileInfo pngToWebpLossyToJpegVar = ImageProcessor.EncodeToJpeg(pngToWebpLossy, $"ToJpeg{i * 25}", i * 25);
-                double pngAndPngToWebpLossyToJpegVarPstr = ImageProcessor.CalculatePsnr(png, pngToWebpLossyToJpegVar);
-                float sizeDifference = ImageProcessor.SizeDifference(png.Length, pngToWebpLossyToJpegVar.Length); 
-            
-                Console.WriteLine($"\tPNG to WebPLossy to JPEG{i * 25}. Distortion: {pngAndPngToWebpLossyToJpegVarPstr:N2}dB Reduction: {sizeDifference:N2}%");   
-            }
             
             Console.WriteLine("PNGtoWebPLossy-PNGtoWebPLossyToJPEG");
             for (int i = 0; i <= 4; i++)
             {
                 FileInfo pngToWebpLossyToJpegVar = ImageProcessor.EncodeToJpeg(pngToWebpLossy, $"ToJpeg{i * 25}", i * 25);
-                double pngToWebpLossyAndPngToWebpLossyToJpegVarPstr = ImageProcessor.CalculatePsnr(pngToWebpLossy, pngToWebpLossyToJpegVar);
-                float sizeDifference = ImageProcessor.SizeDifference(pngToWebpLossy.Length, pngToWebpLossyToJpegVar.Length); 
             
-                Console.WriteLine($"\tPNG to WebPLossy to JPEG{i * 25}. Distortion: {pngToWebpLossyAndPngToWebpLossyToJpegVarPstr:N2}dB Reduction: {sizeDifference:N2}%");   
+                Console.WriteLine($"\tPNG to WebPLossy to JPEG{i * 25}. " +
+                                  $"Distortion: {ImageProcessor.CalculatePsnr(pngToWebpLossy, pngToWebpLossyToJpegVar):N2}dB " +
+                                  $"Reduction: {ImageProcessor.SizeDifference(pngToWebpLossy.Length, pngToWebpLossyToJpegVar.Length):N2}%");   
             }
             
+            Console.WriteLine("PNG-PNGtoWebPLossyToJPEG");
+            for (int i = 0; i <= 4; i++)
+            {
+                FileInfo pngToWebpLossyToJpegVar = ImageProcessor.EncodeToJpeg(pngToWebpLossy, $"ToJpeg{i * 25}", i * 25);
+            
+                Console.WriteLine($"\tPNG to WebPLossy to JPEG{i * 25}. " +
+                                  $"Distortion: {ImageProcessor.CalculatePsnr(png, pngToWebpLossyToJpegVar):N2}dB " +
+                                  $"Reduction: {ImageProcessor.SizeDifference(png.Length, pngToWebpLossyToJpegVar.Length):N2}%");   
+            }
         }
 
         private static void PngToWebpLossyVaryQuality(FileInfo png)
@@ -132,11 +131,11 @@ namespace TP2
             FileInfo errorPngToJpegAndPngToJpegToWebpLossy = ImageProcessor.CalculateErrorInWebpLossless(pngToJpeg, pngToJpegToWebpLossy);
             FileInfo pngToJpegToWebpLossless = ImageProcessor.EncodeToWebp(pngToJpeg, "ToWebpLossless",  100, true);
             
-            Console.WriteLine("\n1.1.1b PNG to WebPLossless comparisons" +
-                              "\nPngToWebpLossless-PngToJpegToWebpLossy:" +
-                              $"\n\tReduction: {ImageProcessor.SizeDifference(pngToJpegToWebpLossless.Length, pngToJpegToWebpLossy.Length):N2}%" +
-                              $"\nPngToWebpLossless-ErrorPngToJpgAndPngToJpegtoWebpLossy:" +
-                              $"\n\tReduction: {ImageProcessor.SizeDifference(pngToJpegToWebpLossless.Length, errorPngToJpegAndPngToJpegToWebpLossy.Length):N2}%");
+            Console.WriteLine("\n1.1.1b Comparisons with PNG to WebPLossless" +
+                              "\nPngToJpegToWebpLossy-PngToJpegToWebpLossless:" +
+                              $"\n\tReduction: {ImageProcessor.SizeDifference(pngToJpegToWebpLossy.Length, pngToJpegToWebpLossless.Length):N2}%" +
+                              $"\nErrorPngToJpgAndPngToJpegToWebpLossy-PngToJpegToWebpLossless:" +
+                              $"\n\tReduction: {ImageProcessor.SizeDifference(errorPngToJpegAndPngToJpegToWebpLossy.Length, pngToJpegToWebpLossless.Length):N2}%");
         }
 
         private static void PngToJpegVaryQuality(FileInfo png)

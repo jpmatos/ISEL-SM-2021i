@@ -24,8 +24,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ecfd319d-1dd9-42be-a9b6-2d04d9b717b6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TP2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP2/ImageProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TP2/ImageProcessor.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP2/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TP2/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,11 +46,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/cd/e556f2fe/Path.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65072C4B-7F11-4AB9-B476-E9EF7250D2BB/10/Gdiplus.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65072C4B-7F11-4AB9-B476-E9EF7250D2BB/10/Gdiplus.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7463D82F-BA6E-4A67-8522-4B0F1DA14B0D/0c/cace76e4/SimpleEncoder.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65072C4B-7F11-4AB9-B476-E9EF7250D2BB/8/Bitmap.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1E9166BF-CA65-4377-B09C-EA42D003812D/fc/d62b3eca/Image.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65072C4B-7F11-4AB9-B476-E9EF7250D2BB/14/Image.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65072C4B-7F11-4AB9-B476-E9EF7250D2BB/8/Bitmap.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1E9166BF-CA65-4377-B09C-EA42D003812D/fc/d62b3eca/Image.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65072C4B-7F11-4AB9-B476-E9EF7250D2BB/14/Image.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -83,7 +83,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Project.TP2">
+  <component name="RunManager" selected="Publish to folder.SMTP2">
+    <configuration name="Publish TP2 to folder" type="DotNetFolderPublish" factoryName="Publish to folder" temporary="true">
+      <riderPublish target_folder="$PROJECT_DIR$/TP2/out" target_framework="net48" uuid_high="1986890466823850104" uuid_low="-7866635823299933478" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SMTP2" type="DotNetFolderPublish" factoryName="Publish to folder" temporary="true">
+      <riderPublish target_folder="$PROJECT_DIR$/../../out" target_framework="net48" uuid_high="1986890466823850104" uuid_low="-7866635823299933478" />
+      <method v="2" />
+    </configuration>
     <configuration name="ConsoleApp1" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -120,6 +128,12 @@
         <option name="Build" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Publish to folder.SMTP2" />
+        <item itemvalue="Publish to folder.Publish TP2 to folder" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -134,7 +148,9 @@
       <workItem from="1609538156446" duration="1145000" />
       <workItem from="1609563809905" duration="7657000" />
       <workItem from="1609642286757" duration="876000" />
-      <workItem from="1609697678592" duration="5626000" />
+      <workItem from="1609697678592" duration="5855000" />
+      <workItem from="1609802958719" duration="1848000" />
+      <workItem from="1609808311832" duration="1360000" />
     </task>
     <task id="LOCAL-00001" summary="Migrated to .net. Created ImageProcessor. Done 1.1.1">
       <created>1609567869745</created>
@@ -150,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609570930601</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Finished all output information required. Now outputs to a file in /result">
+      <created>1609703570347</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1609703570347</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +197,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Migrated to .net. Created ImageProcessor. Done 1.1.1" />
     <MESSAGE value="Done 1.1.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done 1.1.2" />
+    <MESSAGE value="Finished all output information required. Now outputs to a file in /result" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished all output information required. Now outputs to a file in /result" />
   </component>
 </project>
